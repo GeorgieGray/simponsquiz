@@ -1,60 +1,85 @@
 const questions = [
     {
-        question: 'How long did it take to film the Jimminy Jillickers scene in the Radioactive Man movie?',
+        prompt: 'How long did it take to film the Jimminy Jillickers scene in the Radioactive Man movie?',
         options: [
             'Nine hours',
-            'Seven hours', 
-            'Eight hours', 
+            'Seven hours',
+            'Eight hours',
             'Two days'
         ],
         answer: 1
     },
     {
-        question: 'Who voiced Jessica Lovejoy?',
+        prompt: 'Who voiced Jessica Lovejoy?',
         options: [
             'Sara Gilbert',
-            'Winona Ryder', 
-            'Meryl Streep', 
+            'Winona Ryder',
+            'Meryl Streep',
             'Kim Kardashian'
         ],
         answer: 2
     }
 ]
-const mainData = document.querySelector('main')
+const mainElement = document.querySelector('main')
 
 const clear = () => {
-    mainData.innerHTML = "";
+    mainElement.innerHTML = "";
 }
-const question = (question, answers) => {
+
+let points =0 
+const  addPoint=() => {
+    points++
+    console.log(points)
+}
+
+const addQuestion = (question) => {
     const h2 = document.createElement("h2")
-    const newContent = document.createTextNode(question)
+    const newContent = document.createTextNode(question.prompt)
     h2.appendChild(newContent)
-    mainData.appendChild(h2)
+    mainElement.appendChild(h2)
     const ol = document.createElement('ol')
 
-    for (const answer of answers) {
+    for (let index = 0; index < question.options.length; index++) {
         const li = document.createElement('li')
-        const text = document.createTextNode(answer)
+        const text = document.createTextNode(question.options[index])
         li.appendChild(text)
-        li.addEventListener('click', nextQuestion)
+        li.addEventListener('click', () =>{
+
+            if (index === question.answer) {
+                addPoint()
+            }
+            nextQuestion()
+        })
         ol.appendChild(li)
+        console.log(question.options[index],  index === question.answer)
+    
     }
 
-    mainData.appendChild(ol)
+    mainElement.appendChild(ol)
 }
 
-let activeQuestion=0
-const nextQuestion=(event) => {
-    activeQuestion++
+let activeQuestion = 0
+
+const displayActiveQuestion = () => {
     clear()
-    question(questions[activeQuestion].question,questions[activeQuestion].options)
+    // addQuestion(questions[activeQuestion])
+    if (activeQuestion > (questions.length - 1)) {
+        alert('GAME OVER ' + points)
+    } else {
+        addQuestion(questions[activeQuestion])
+    }
 }
+
+const nextQuestion = (event) => {
+    activeQuestion++
+    displayActiveQuestion()
+}
+
 const startButton = document.querySelector('#start-game')
-console.log(startButton)
-startButton.addEventListener('click', (event) => {
-    clear()
-    question(questions[activeQuestion].question,questions[activeQuestion].options)
-})
+
+startButton.addEventListener('click', displayActiveQuestion)
+
+
 
 
 
