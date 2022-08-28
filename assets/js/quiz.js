@@ -1,13 +1,13 @@
 const questions = [
     {
-        prompt: 'How long did it take to film the Jimminy Jillickers scene in the Radioactive Man movie?',
+        prompt: ' What does the J stand for in Homer J Simpson?',
         options: [
-            'Nine hours',
-            'Seven hours',
-            'Eight hours',
-            'Two days'
+            'Jojo',
+            'Joseph',
+            'Jay',
+            'Jesus'
         ],
-        answer: 1
+        answer: 2
     },
     {
         prompt: 'Who voiced Jessica Lovejoy?',
@@ -18,7 +18,88 @@ const questions = [
             'Kim Kardashian'
         ],
         answer: 2
-    }
+    },
+    {
+        prompt: 'What is the name of Hank Scorpio\'s company?',
+        options: [
+            'Hammocks\'R\'Us',
+            'Globex',
+            'The Hammock Hut',
+            'Put your butt there'
+        ],
+        answer: 1
+    },
+    {
+        prompt: 'What did Milhouse write on Bart\'s leg cast?',
+        options: [
+            'See you in the car! Best Wishes Milhouse',
+            'Milpool',
+            'Everythings coming up Milhouse!',
+            'Thirllhouse'
+        ],
+        answer: 1
+    },
+    {
+        prompt: 'What is Marge\'s natural hair colour?',
+        options: [
+            'Blue',
+            'Blonde',
+            'Black',
+            'Grey'
+        ],
+        answer: 3
+    },
+    {
+        prompt: 'THATS IT! BACK TO...?',
+        options: [
+            'Winnepeg',
+            'Springfield',
+            'Wisconsin',
+            'Shelbyville'
+        ],
+        answer: 0
+    },
+    {
+        prompt: 'What did Skinner tell Superintendent Chalmers he was doing on his windowsill',
+        options: [
+            'Watering his plants',
+            'Isometric exercise',
+            'Watering the aurora borealis',
+            'Steaming clams'
+        ],
+        answer: 1
+    },
+    {
+        prompt: 'What did Skinner tell Superintendent Chalmers he was doing on his windowsill',
+        options: [
+            'Watering his plants',
+            'Isometric exercise',
+            'Watering the aurora borealis',
+            'Steaming clams'
+        ],
+        answer: 1
+    },
+    {
+        prompt: 'What weight did Homer have to reach in order to achieve disability for hyper-obesity?',
+        options: [
+            '250 pounds',
+            '300 pounds',
+            '500 pounds',
+            '450 pounds'
+        ],
+        answer: 1
+    },
+    {
+        prompt: 'Which inhabitant of the Springfield Retirement Home turns out to be a successful cat - burglar?',
+        options: [
+            'Abe Simpson',
+            'Hans Moleman',
+            'Eleanor Abernathy',
+            'Mr.Molloy'
+        ],
+        answer: 3
+    },
+
 ]
 const mainElement = document.querySelector('main')
 
