@@ -1,0 +1,74 @@
+@font-face {
+    font-family: "Simpsons";
+    src: url("../font/Simpsonfont.ttf") format("truetype");
+}
+
+.image {
+    width: 100%;
+    height: 383px;
+    background-color:black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image img {
+    height: 100%;
+}
+
+.hidden {
+    position: absolute;
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	padding: 0 !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	clip: rect(0,0,0,0) !important;
+	white-space: nowrap !important;
+	border: 0 !important;
+}
+
+.intro {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('../images/background.png');
+    background-repeat: repeat-x;
+    overflow-x: hidden;
+}
+
+.intro .title-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    right: 0;
+    top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+}
+
+.intro p {
+    color: black;
+    font-size: 84px;
+    text-align: center;
+    font-family: Simpsons, ubuntu;
+    display: inline-block;
+    position: relative;
+}
+
+.intro p::before,
+.intro p::after {
+    content: attr(data-text);
+}
+
+.intro p::after {
+    color:  #FFD90F;
+    position: absolute;
+    z-index: 5;
+    top: -2px;
+    left: 7px;
+}

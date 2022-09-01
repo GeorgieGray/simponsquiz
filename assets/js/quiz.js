@@ -7,7 +7,8 @@ const questions = [
             'Jay',
             'Jesus'
         ],
-        answer: 2
+        answer: 2,
+        image:'assets/images/homer-j-simpson.png'
     },
     {
         prompt: 'Who voiced Jessica Lovejoy?',
@@ -17,7 +18,8 @@ const questions = [
             'Meryl Streep',
             'Kim Kardashian'
         ],
-        answer: 2
+        answer: 2,
+        image:'assets/images/jessica-lovejoy.png'
     },
     {
         prompt: 'What is the name of Hank Scorpio\'s company?',
@@ -27,7 +29,8 @@ const questions = [
             'The Hammock Hut',
             'Put your butt there'
         ],
-        answer: 1
+        answer: 1,
+        image:'assets/images/hank-scorpio.jpg'
     },
     {
         prompt: 'What did Milhouse write on Bart\'s leg cast?',
@@ -37,7 +40,8 @@ const questions = [
             'Everythings coming up Milhouse!',
             'Thirllhouse'
         ],
-        answer: 1
+        answer: 1,
+        image:'assets/images/milhouse-signing-cast.png'
     },
     {
         prompt: 'What is Marge\'s natural hair colour?',
@@ -47,7 +51,8 @@ const questions = [
             'Black',
             'Grey'
         ],
-        answer: 3
+        answer: 3,
+        image:'assets/images/marge-hair.jpg'
     },
     {
         prompt: 'THATS IT! BACK TO...?',
@@ -57,7 +62,8 @@ const questions = [
             'Wisconsin',
             'Shelbyville'
         ],
-        answer: 0
+        answer: 0,
+        image:'assets/images/back-to.jpg'
     },
     {
         prompt: 'What did Skinner tell Superintendent Chalmers he was doing on his windowsill',
@@ -67,17 +73,8 @@ const questions = [
             'Watering the aurora borealis',
             'Steaming clams'
         ],
-        answer: 1
-    },
-    {
-        prompt: 'What did Skinner tell Superintendent Chalmers he was doing on his windowsill',
-        options: [
-            'Watering his plants',
-            'Isometric exercise',
-            'Watering the aurora borealis',
-            'Steaming clams'
-        ],
-        answer: 1
+        answer: 1,
+        image:'assets/images/skinner-window.jpg'
     },
     {
         prompt: 'What weight did Homer have to reach in order to achieve disability for hyper-obesity?',
@@ -87,7 +84,8 @@ const questions = [
             '500 pounds',
             '450 pounds'
         ],
-        answer: 1
+        answer: 1,
+        image:'assets/images/homer-muumuu.jpg'
     },
     {
         prompt: 'Which inhabitant of the Springfield Retirement Home turns out to be a successful cat - burglar?',
@@ -97,7 +95,8 @@ const questions = [
             'Eleanor Abernathy',
             'Mr.Molloy'
         ],
-        answer: 3
+        answer: 3,
+        image:'assets/images/sneakers-for-sneaking.jpg'
     },
 
 ]
@@ -112,32 +111,49 @@ const  addPoint=() => {
     points++
 }
 
+let activeQuestion = 0
+
 const displayQuestion = (question) => {
+    const counter = document.createElement('p')
+    const counterText = document.createTextNode('Question ' + (activeQuestion + 1) + ' / ' + questions.length)
+    counter.appendChild(counterText)
+    mainElement.appendChild(counter) 
+
+    const container = document.createElement('div')
+    container.classList.add('image')
+
+    const image = document.createElement("img")
+    image.src=question.image
+
+    container.appendChild(image)
+    mainElement.appendChild(container)
+
     const h2 = document.createElement("h2")
     const prompt = document.createTextNode(question.prompt)
+
     h2.appendChild(prompt)
     mainElement.appendChild(h2)
+
     const ol = document.createElement('ol')
 
     for (let index = 0; index < question.options.length; index++) {
         const li = document.createElement('li')
         const text = document.createTextNode(question.options[index])
+
         li.appendChild(text)
         li.addEventListener('click', () =>{
-
             if (index === question.answer) {
                 addPoint()
             }
+
             nextQuestion()
         })
+
         ol.appendChild(li)
-    
     }
 
     mainElement.appendChild(ol)
 }
-
-let activeQuestion = 0
 
 const displayActiveQuestion = () => {
     clear()
