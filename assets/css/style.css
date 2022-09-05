@@ -190,6 +190,10 @@ h1, h2, h3, h4, h5 {
     text-align: center;
 }
 
+html, body {
+    touch-action: none
+}
+
 @media screen and (max-width: 450px) {
     .intro p {
         font-size: 68px;
