@@ -8,7 +8,8 @@ const questions = [
             'Jesus'
         ],
         answer: 2,
-        image:'assets/images/homer-j-simpson.png'
+        image:'assets/images/homer-j-simpson.png',
+        alt: 'Homer Simpson in front of mural with his mniddle name hidden behind a bush'
     },
     {
         prompt: 'Who voiced Jessica Lovejoy?',
@@ -19,7 +20,8 @@ const questions = [
             'Kim Kardashian'
         ],
         answer: 2,
-        image:'assets/images/jessica-lovejoy.png'
+        image:'assets/images/jessica-lovejoy.jpg',
+        alt: "Jessica Lovejoy holding a baton"
     },
     {
         prompt: 'What is the name of Hank Scorpio\'s company?',
@@ -30,7 +32,8 @@ const questions = [
             'Put your butt there'
         ],
         answer: 1,
-        image:'assets/images/hank-scorpio.jpg'
+        image:'assets/images/hank-scorpio.jpg',
+        alt: "Hank Scorpio firing a flamethrower and laughing"
     },
     {
         prompt: 'What did Milhouse write on Bart\'s leg cast?',
@@ -41,7 +44,8 @@ const questions = [
             'Thirllhouse'
         ],
         answer: 1,
-        image:'assets/images/milhouse-signing-cast.png'
+        image:'assets/images/milhouse-signing-cast.png',
+        alt: "Milhouse signing the cast of Bart Simpson's broken leg"
     },
     {
         prompt: 'What is Marge\'s natural hair colour?',
@@ -52,7 +56,8 @@ const questions = [
             'Grey'
         ],
         answer: 3,
-        image:'assets/images/marge-hair.jpg'
+        image:'assets/images/marge-hair.jpg',
+        alt: "Apu Nahasapeemapetilan pointing at Marge Simpson's hair with a walking stick"
     },
     {
         prompt: 'THATS IT! BACK TO...?',
@@ -63,7 +68,8 @@ const questions = [
             'Shelbyville'
         ],
         answer: 0,
-        image:'assets/images/back-to.jpg'
+        image:'assets/images/back-to.jpg',
+        alt: "Angry man driving a car"
     },
     {
         prompt: 'What did Skinner tell Superintendent Chalmers he was doing on his windowsill',
@@ -74,7 +80,8 @@ const questions = [
             'Steaming clams'
         ],
         answer: 1,
-        image:'assets/images/skinner-window.jpg'
+        image:'assets/images/skinner-window.jpg',
+        alt: 'Armin Tamzarian stretching his leg on a windown in his "mother\'s" kitchen'
     },
     {
         prompt: 'What weight did Homer have to reach in order to achieve disability for hyper-obesity?',
@@ -85,7 +92,8 @@ const questions = [
             '450 pounds'
         ],
         answer: 1,
-        image:'assets/images/homer-muumuu.jpg'
+        image:'assets/images/homer-muumuu.jpg',
+        alt: "Homer Simpson wearing a dress"
     },
     {
         prompt: 'Which inhabitant of the Springfield Retirement Home turns out to be a successful cat - burglar?',
@@ -96,7 +104,8 @@ const questions = [
             'Mr.Molloy'
         ],
         answer: 3,
-        image:'assets/images/sneakers-for-sneaking.jpg'
+        image:'assets/images/sneakers-for-sneaking.jpg',
+        alt: "Abe Simpson lying on the floor staring at a pair of sneakers"
     },
 
 ]
@@ -124,23 +133,31 @@ const displayQuestion = (question) => {
 
     const image = document.createElement("img")
     image.src=question.image
+    image.alt=question.alt
 
     container.appendChild(image)
     mainElement.appendChild(container)
+
+    const textContainer = document.createElement('div')
+    textContainer.classList.add('question-text')
+
 
     const h2 = document.createElement("h2")
     const prompt = document.createTextNode(question.prompt)
 
     h2.appendChild(prompt)
-    mainElement.appendChild(h2)
+    textContainer.appendChild(h2)
 
     const ol = document.createElement('ol')
+
+
 
     for (let index = 0; index < question.options.length; index++) {
         const li = document.createElement('li')
         const text = document.createTextNode(question.options[index])
 
         li.appendChild(text)
+        li.classList.add('button')
         li.addEventListener('click', () =>{
             if (index === question.answer) {
                 addPoint()
@@ -152,7 +169,9 @@ const displayQuestion = (question) => {
         ol.appendChild(li)
     }
 
-    mainElement.appendChild(ol)
+   textContainer.appendChild(ol)
+   
+   mainElement.appendChild(textContainer)
 }
 
 const displayActiveQuestion = () => {
@@ -194,6 +213,7 @@ const displayResult = () => {
 
     const button = document.createElement('button')
     const buttonText = document.createTextNode('Restart')
+    button.classList.add('button')
     button.appendChild(buttonText)
     button.addEventListener('click', () => {
         activeQuestion = 0

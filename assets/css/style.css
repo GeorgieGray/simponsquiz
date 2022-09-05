@@ -2,11 +2,26 @@
     font-family: "Simpsons";
     src: url("../font/Simpsonfont.ttf") format("truetype");
 }
+@font-face {
+    font-family: "Akbar";
+    src: url("../font/akbar.ttf") format("truetype");
+}
+:root {
+    --yellow: #FFD90F;
+    --grey: #1E2430;
+    --grey-dark: #131B2A;
+    --grey-black: #0A1120;
+    --white: #FCFCFC;
+    --font-primary: 'Open Sans', sans-serif;
+    --font-secondary: Simpsons, ubuntu;
+    --font-tertiary: Akbar, ubuntu;
+}
 
 .image {
+    height: 480px;
     width: 100%;
-    height: 383px;
-    background-color:black;
+    background-color: var(--grey-dark);
+    border-bottom: 1px solid var(--grey-black);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,6 +29,9 @@
 
 .image img {
     height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
 }
 
 .hidden {
@@ -37,6 +55,7 @@
     background-image: url('../images/background.png');
     background-repeat: repeat-x;
     overflow-x: hidden;
+    align-self: normal;
 }
 
 .intro .title-container {
@@ -55,9 +74,10 @@
     color: black;
     font-size: 84px;
     text-align: center;
-    font-family: Simpsons, ubuntu;
+    font-family: var(--font-secondary);
     display: inline-block;
     position: relative;
+    
 }
 
 .intro p::before,
@@ -66,9 +86,85 @@
 }
 
 .intro p::after {
-    color:  #FFD90F;
+    color:  var(--yellow);
     position: absolute;
     z-index: 5;
     top: -2px;
     left: 7px;
+}
+.intro-text {
+    padding: 20px;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.intro-text h2 {
+    font-size: 40px;
+    /* font-weight: bold; */
+    margin-bottom: 16px;
+}
+.intro-text p {
+    font-size: 20px;
+}
+.intro-text p:first-of-type {
+    margin-bottom: 20px;
+}
+.button {
+    background-color: var(--grey);
+    border: 1px solid var(--yellow);
+    font-family: var(--font-tertiary);
+    font-size: 20px;
+    padding: 8px 20px;
+    border-radius: 3px;
+    color: var(--yellow);
+    position: relative;
+}
+.button:hover {
+    cursor:pointer;
+    background-color: var(--yellow);
+    color: var(--grey)
+}
+body {
+    background-color: var(--grey);
+    color: var(--white);
+    font-family: var(--font-primary);
+    min-width: 425px;
+}
+.start-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 32px;
+}
+.comic-book {
+    margin-left:-220px;
+    margin-top: -27px;
+    margin-bottom: 22px;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.question-text {
+    max-width: 640px;
+    width: 100%;
+    margin: 20px 0;
+}
+.question-text h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+.question-text li {
+   font-family: var(--font-primary);
+   border-radius: 10px;
+   color: var(--white)
+}
+.question-text ol {
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+}
+h1, h2, h3, h4, h5 {
+    font-weight: 300;
 }

@@ -6,6 +6,9 @@
     <meta name="description" content="Dinosaur history website for kids" />
     <meta name="keywords" content="quiz, history, children, learning" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
 
@@ -17,7 +20,7 @@
       <h1 class="hidden">The Simpsons Quiz</h1>
       <div class="intro">
         <div>
-          <img src="/assets/images/intro.png" alt="illustration of springfield from The Simpsons">
+          <img src="assets/images/intro.png" alt="illustration of springfield from The Simpsons">
         </div>
         <div class="title-container">
           <p data-text="The"></p>
@@ -25,11 +28,20 @@
           <p data-text="Quiz"></p>
         </div>
       </div>
-        <p>
-          A hoy hoy! Welcome to my simpsons quiz where you will be tested on your obsure Simpson's knowledge!
-          Let's see if you can fly high in the sky with Artie or will you fall to the bottom of Springfield gorge?
+      <div class="intro-text">
+      <h2>A hoy hoy!</h2>
+      <p>
+        Welcome to my simpsons quiz where you will be tested on your obsure Simpson's knowledge!
+      </p>
+      <p>
+          Let's see if you can fly high in the sky with Arnie or will you fall to the bottom of Springfield gorge?
         </p>
-        <button id="start-game">Start Game</button>
+      </div>
+      <div class="start-button">
+        <button class="button" id="start-game">Start Game</button>
+        <img class="comic-book" src="assets/images/comic-book-guy.png" alt="Comic book guy in the collector costume "/>
+      </div>
+      
       
     </main>
 
