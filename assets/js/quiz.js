@@ -8,7 +8,7 @@ const questions = [
             'Jesus'
         ],
         answer: 2,
-        image:'assets/images/homer-j-simpson.png',
+        image: 'assets/images/homer-j-simpson.png',
         alt: 'Homer Simpson in front of mural with his mniddle name hidden behind a bush'
     },
     {
@@ -20,7 +20,7 @@ const questions = [
             'Kim Kardashian'
         ],
         answer: 2,
-        image:'assets/images/jessica-lovejoy.jpg',
+        image: 'assets/images/jessica-lovejoy.jpg',
         alt: "Jessica Lovejoy holding a baton"
     },
     {
@@ -32,7 +32,7 @@ const questions = [
             'Put your butt there'
         ],
         answer: 1,
-        image:'assets/images/hank-scorpio.jpg',
+        image: 'assets/images/hank-scorpio.jpg',
         alt: "Hank Scorpio firing a flamethrower and laughing"
     },
     {
@@ -44,7 +44,7 @@ const questions = [
             'Thirllhouse'
         ],
         answer: 1,
-        image:'assets/images/milhouse-signing-cast.png',
+        image: 'assets/images/milhouse-signing-cast.png',
         alt: "Milhouse signing the cast of Bart Simpson's broken leg"
     },
     {
@@ -56,19 +56,19 @@ const questions = [
             'Grey'
         ],
         answer: 3,
-        image:'assets/images/marge-hair.jpg',
+        image: 'assets/images/marge-hair.jpg',
         alt: "Apu Nahasapeemapetilan pointing at Marge Simpson's hair with a walking stick"
     },
     {
         prompt: 'THATS IT! BACK TO...?',
         options: [
-            'Winnepeg',
-            'Springfield',
-            'Wisconsin',
-            'Shelbyville'
+            'Winnepeg!',
+            'Springfield!',
+            'Wisconsin!',
+            'Shelbyville!'
         ],
         answer: 0,
-        image:'assets/images/back-to.jpg',
+        image: 'assets/images/back-to.jpg',
         alt: "Angry man driving a car"
     },
     {
@@ -80,7 +80,7 @@ const questions = [
             'Steaming clams'
         ],
         answer: 1,
-        image:'assets/images/skinner-window.jpg',
+        image: 'assets/images/skinner-window.jpg',
         alt: 'Armin Tamzarian stretching his leg on a windown in his "mother\'s" kitchen'
     },
     {
@@ -92,7 +92,7 @@ const questions = [
             '450 pounds'
         ],
         answer: 1,
-        image:'assets/images/homer-muumuu.jpg',
+        image: 'assets/images/homer-muumuu.jpg',
         alt: "Homer Simpson wearing a dress"
     },
     {
@@ -104,8 +104,20 @@ const questions = [
             'Mr.Molloy'
         ],
         answer: 3,
-        image:'assets/images/sneakers-for-sneaking.jpg',
+        image: 'assets/images/sneakers-for-sneaking.jpg',
         alt: "Abe Simpson lying on the floor staring at a pair of sneakers"
+    },
+    {
+        prompt: 'How much does it cost to call the Corey hotline?',
+        options: [
+            '$4.95 per minute',
+            '$3 per hour',
+            'It\'s free',
+            'They pay you to call'
+        ],
+        answer: 0,
+        image: 'assets/images/corey-hotline.jpg',
+        alt: "Lisa Simpson on the phone while smiling"
     },
 
 ]
@@ -115,42 +127,62 @@ const clear = () => {
     mainElement.innerHTML = "";
 }
 
-let points =0 
-const  addPoint=() => {
+let points = 0
+const addPoint = () => {
     points++
 }
 
 let activeQuestion = 0
 
-const displayQuestion = (question) => {
-    const counter = document.createElement('p')
-    const counterText = document.createTextNode('Question ' + (activeQuestion + 1) + ' / ' + questions.length)
-    counter.appendChild(counterText)
-    mainElement.appendChild(counter) 
 
+
+
+const displayHeading = (text) => {
+    const heading = document.createElement('p')
+    const headingText = document.createTextNode(text)
+    heading.appendChild(headingText)
+    heading.classList.add('question-heading')
+    mainElement.appendChild(heading)
+
+}
+
+const displayImage = (src, alt) => {
     const container = document.createElement('div')
     container.classList.add('image')
 
     const image = document.createElement("img")
-    image.src=question.image
-    image.alt=question.alt
+    image.src = src
+    image.alt = alt
 
     container.appendChild(image)
     mainElement.appendChild(container)
+}
 
+
+const displayPrompt=(text) => {
     const textContainer = document.createElement('div')
-    textContainer.classList.add('question-text')
+    textContainer.classList.add('quiz-body')
 
 
     const h2 = document.createElement("h2")
-    const prompt = document.createTextNode(question.prompt)
+    const prompt = document.createTextNode(text)
 
     h2.appendChild(prompt)
     textContainer.appendChild(h2)
+    mainElement.appendChild(textContainer)
+}
+
+const displayQuestion = (question) => {
+
+    displayHeading('Question ' + (activeQuestion + 1) + ' / ' + questions.length)
+    displayImage(question.image, question.alt)
+    displayPrompt(question.prompt)
+
+    
+    const textContainer = document.createElement('div')
+    textContainer.classList.add('quiz-body')
 
     const ol = document.createElement('ol')
-
-
 
     for (let index = 0; index < question.options.length; index++) {
         const li = document.createElement('li')
@@ -158,7 +190,7 @@ const displayQuestion = (question) => {
 
         li.appendChild(text)
         li.classList.add('button')
-        li.addEventListener('click', () =>{
+        li.addEventListener('click', () => {
             if (index === question.answer) {
                 addPoint()
             }
@@ -169,9 +201,8 @@ const displayQuestion = (question) => {
         ol.appendChild(li)
     }
 
-   textContainer.appendChild(ol)
-   
-   mainElement.appendChild(textContainer)
+    textContainer.appendChild(ol)
+    mainElement.appendChild(textContainer)
 }
 
 const displayActiveQuestion = () => {
@@ -181,62 +212,66 @@ const displayActiveQuestion = () => {
 
 const getResultQuote = (points) => {
     if (points < 4) {
-        return 'less than 4'
+        return 'You\'ve tried nothing and you\'re all out of ideas!'
     } else if (points < 7) {
-        return 'less than 7 but greater than 4'
+        return 'Umm... You probably should ignore that.'
     } else {
-        return 'greater than 7'
+        return 'I gotta tell ya, this is pretty terrific!'
     }
 }
 
+const getResultImage = (points) => {
+    if (points < 4) {
+        return 'assets/images/all-out-of-ideas.jpg'
+    } else if (points < 7) {
+        return 'assets/images/you-should-ignore-that.jpg'
+    } else {
+        return 'assets/images/man-with-two-knives.jpg'
+    }
+}
+const getResultAlt = (points) => {
+    if (points < 4) {
+        return 'Maude and Ned Flanders talking in an office'
+    } else if (points < 7) {
+        return 'Waylon Smithers and Lisa Simpson looking at a computer'
+    } else {
+        return 'Moe Szyslak holding two knives and smiling'
+    }
+}
 
 const displayResult = () => {
     clear()
-    const container = document.createElement('div')
-    container.classList.add('results')
-    
-    const heading = document.createElement('h1')
-    const headingText = document.createTextNode('GAME OVER')
-    heading.appendChild(headingText)
+    displayHeading('Game Over')
 
-    // const image = document.createElement('img')
+    const src = getResultImage(points)
+    const alt = getResultAlt(points)
 
-    const quote = document.createElement('p')
-    quote.classList.add('quote')
-    const quoteText = document.createTextNode(getResultQuote(points))
-    quote.appendChild(quoteText)
+    displayImage(src, alt)
 
-    const score = document.createElement('p')
-    score.classList.add('score')
-    const scoreText = document.createTextNode(points + '/' + questions.length)
-    score.appendChild(scoreText)
+
+    const quote = getResultQuote(points)
+
+   displayPrompt(quote)
+   displayPrompt(points + '/' + questions.length)
 
     const button = document.createElement('button')
     const buttonText = document.createTextNode('Restart')
     button.classList.add('button')
+    button.classList.add('restart-button')
     button.appendChild(buttonText)
     button.addEventListener('click', () => {
         activeQuestion = 0
-        points= 0
+        points = 0
         displayActiveQuestion()
-        
-    
     })
 
-    container.appendChild(heading)
-    container.appendChild(quote)
-    container.appendChild(score)
-    container.appendChild(button)
-
-    mainElement.appendChild(container)
-    
-     
+    mainElement.appendChild(button)
 
 }
 
 const nextQuestion = () => {
     activeQuestion++
-    
+
     if (activeQuestion > (questions.length - 1)) {
         displayResult()
     } else {
