@@ -8,7 +8,7 @@ const questions = [
             'Jesus'
         ],
         answer: 2,
-        image: 'assets/images/homer-j-simpson.png',
+        image: 'assets/images/homer-j-simpson.jpg',
         alt: 'Homer Simpson in front of mural with his mniddle name hidden behind a bush'
     },
     {
@@ -44,7 +44,7 @@ const questions = [
             'Thirllhouse'
         ],
         answer: 1,
-        image: 'assets/images/milhouse-signing-cast.png',
+        image: 'assets/images/milhouse-signing-cast.jpg',
         alt: "Milhouse signing the cast of Bart Simpson's broken leg"
     },
     {
@@ -138,7 +138,7 @@ let activeQuestion = 0
 
 
 const displayHeading = (text) => {
-    const heading = document.createElement('p')
+    const heading = document.createElement('h1')
     const headingText = document.createTextNode(text)
     heading.appendChild(headingText)
     heading.classList.add('question-heading')
@@ -150,11 +150,16 @@ const displayImage = (src, alt) => {
     const container = document.createElement('div')
     container.classList.add('image')
 
+    const aspectRatio = document.createElement('div')
+    aspectRatio.classList.add('image-aspect-ratio')
+
     const image = document.createElement("img")
     image.src = src
     image.alt = alt
 
-    container.appendChild(image)
+    aspectRatio.appendChild(image)
+    
+    container.appendChild(aspectRatio)
     mainElement.appendChild(container)
 }
 
