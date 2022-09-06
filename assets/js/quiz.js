@@ -195,7 +195,8 @@ const displayQuestion = (question) => {
 
         li.appendChild(text)
         li.classList.add('button')
-        li.addEventListener('click', () => {
+        li.addEventListener('click', (event) => {
+            event.preventDefault()
             if (index === question.answer) {
                 addPoint()
             }
