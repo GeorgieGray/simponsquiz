@@ -118,13 +118,13 @@ const questions = [
         answer: 0,
         image: 'assets/images/corey-hotline.jpg',
         alt: "Lisa Simpson on the phone while smiling"
-    },
-
+    }
 ]
-const mainElement = document.querySelector('main')
+const quiz = document.querySelector('#quiz')
+const home = document.querySelector('#home')
 
 const clear = () => {
-    mainElement.innerHTML = "";
+    quiz.innerHTML = "";
 }
 
 let points = 0
@@ -142,7 +142,7 @@ const displayHeading = (text) => {
     const headingText = document.createTextNode(text)
     heading.appendChild(headingText)
     heading.classList.add('question-heading')
-    mainElement.appendChild(heading)
+    quiz.appendChild(heading)
 
 }
 
@@ -160,7 +160,7 @@ const displayImage = (src, alt) => {
     aspectRatio.appendChild(image)
     
     container.appendChild(aspectRatio)
-    mainElement.appendChild(container)
+    quiz.appendChild(container)
 }
 
 
@@ -174,7 +174,7 @@ const displayPrompt=(text) => {
 
     h2.appendChild(prompt)
     textContainer.appendChild(h2)
-    mainElement.appendChild(textContainer)
+    quiz.appendChild(textContainer)
 }
 
 const displayQuestion = (question) => {
@@ -195,8 +195,8 @@ const displayQuestion = (question) => {
 
         li.appendChild(text)
         li.classList.add('button')
-        li.addEventListener('click', (event) => {
-            event.preventDefault()
+        li.addEventListener('click', () => {
+            document.activeElement.blur()
             if (index === question.answer) {
                 addPoint()
             }
@@ -208,7 +208,7 @@ const displayQuestion = (question) => {
     }
 
     textContainer.appendChild(ol)
-    mainElement.appendChild(textContainer)
+    quiz.appendChild(textContainer)
 }
 
 const displayActiveQuestion = () => {
@@ -260,6 +260,7 @@ const displayResult = () => {
    displayPrompt(quote)
    displayPrompt(points + '/' + questions.length)
 
+
     const button = document.createElement('button')
     const buttonText = document.createTextNode('Restart')
     button.classList.add('button')
@@ -268,10 +269,11 @@ const displayResult = () => {
     button.addEventListener('click', () => {
         activeQuestion = 0
         points = 0
-        displayActiveQuestion()
+        clear()
+        home.classList.remove('hide')
     })
 
-    mainElement.appendChild(button)
+    quiz.appendChild(button)
 
 }
 
@@ -287,7 +289,10 @@ const nextQuestion = () => {
 
 const startButton = document.querySelector('#start-game')
 
-startButton.addEventListener('click', displayActiveQuestion)
+startButton.addEventListener('click', () => {
+    home.classList.add('hide')
+    displayActiveQuestion()
+})
 
 
 
