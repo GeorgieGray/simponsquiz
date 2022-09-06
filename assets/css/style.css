@@ -83,7 +83,6 @@
     font-family: var(--font-secondary);
     display: inline-block;
     position: relative;
-    
 }
 
 .intro p::before,
@@ -115,6 +114,7 @@
 .intro-text p:first-of-type {
     margin-bottom: 20px;
 }
+
 .button {
     background-color: var(--grey);
     border: 1px solid var(--yellow);
@@ -125,11 +125,15 @@
     color: var(--yellow);
     position: relative;
     user-select: none;
+    cursor: pointer;
 }
-.button:hover, .button:active {
-    cursor:pointer;
-    background-color: var(--yellow);
-    color: var(--grey)
+
+/* https://stackoverflow.com/a/28058919 */
+@media (hover: hover) {
+    .button:hover {
+        background-color: var(--yellow);
+        color: var(--grey)
+    }
 }
 body {
     background-color: var(--grey);
