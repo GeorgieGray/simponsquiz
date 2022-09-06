@@ -72,11 +72,11 @@ const questions = [
         alt: "Angry man driving a car"
     },
     {
-        prompt: 'What did Skinner tell Superintendent Chalmers he was doing on his windowsill',
+        prompt: 'What did Skinner tell Superintendent Chalmers he was doing on his windowsill?',
         options: [
             'Watering his plants',
             'Isometric exercise',
-            'Watering the aurora borealis',
+            'Watching the Aurora Borealis',
             'Steaming clams'
         ],
         answer: 1,
