@@ -128,7 +128,7 @@ const startButton = document.querySelector('#start-game')
 let points = 0
 let activeQuestion = 0
 const choices = []
-let username = ''
+let username = undefined
 
 const clear = () => {
     quiz.innerHTML = "";
@@ -267,6 +267,7 @@ const displayResult = () => {
     button.addEventListener('click', () => {
         activeQuestion = 0
         points = 0
+        choices = []
         clear()
         home.classList.remove('hide')
     })
@@ -339,6 +340,7 @@ const displayUsernameEntry = () => {
     input.required = true
     input.minLength = 3
     input.maxLength = 20
+    input.value = username
 
     const submit = document.createElement('button')
     const submitText = document.createTextNode('Lets go!')
