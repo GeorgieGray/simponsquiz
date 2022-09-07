@@ -127,7 +127,7 @@ const startButton = document.querySelector('#start-game')
 
 let points = 0
 let activeQuestion = 0
-const choices = []
+let choices = []
 let username = ''
 
 const clear = () => {
