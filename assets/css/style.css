@@ -6,12 +6,15 @@
     font-family: "Akbar";
     src: url("../font/akbar.ttf") format("truetype");
 }
+
 :root {
     --yellow: #FFD90F;
     --grey: #1E2430;
     --grey-dark: #131B2A;
     --grey-black: #0A1120;
     --white: #FCFCFC;
+    --right: #29FF37;
+    --wrong: #FF9494;
     --font-primary: 'Open Sans', sans-serif;
     --font-secondary: Simpsons, ubuntu;
     --font-tertiary: Akbar, ubuntu;
@@ -199,6 +202,61 @@ h1, h2, h3, h4, h5 {
     align-items: center;
 }
 
+.summary {
+    list-style: decimal;
+    max-width: 640px;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.summary li ul li {
+    padding-left: 16px;
+    margin-bottom: 20px;
+    margin-top: 8px;
+}
+
+.summary li ul li span {
+    font-weight: bold;
+    padding-left: 4px;
+}
+
+.right {
+    color: var(--right);
+}
+
+.wrong {
+    color: var(--wrong);
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.username-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.username-form label {
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.username-form input {
+    width: 300px;
+    padding: 8px;
+    border-radius: 3px;
+    border: 1px solid var(--grey-dark);
+}
+
+.username-form:focus {
+    outline: var(--grey-black);
+}
+
+.username-form button {
+    margin-top: 20px;
+}
 
 @media screen and (max-width: 450px) {
     .intro p {

@@ -120,22 +120,23 @@ const questions = [
         alt: "Lisa Simpson on the phone while smiling"
     }
 ]
+
 const quiz = document.querySelector('#quiz')
 const home = document.querySelector('#home')
+const startButton = document.querySelector('#start-game')
+
+let points = 0
+let activeQuestion = 0
+const choices = []
+let username = ''
 
 const clear = () => {
     quiz.innerHTML = "";
 }
 
-let points = 0
 const addPoint = () => {
     points++
 }
-
-let activeQuestion = 0
-
-
-
 
 const displayHeading = (text) => {
     const heading = document.createElement('h1')
@@ -143,7 +144,6 @@ const displayHeading = (text) => {
     heading.appendChild(headingText)
     heading.classList.add('question-heading')
     quiz.appendChild(heading)
-
 }
 
 const displayImage = (src, alt) => {
@@ -163,14 +163,14 @@ const displayImage = (src, alt) => {
     quiz.appendChild(container)
 }
 
-
-const displayPrompt=(text) => {
+const displayPrompt=(text, bold) => {
     const textContainer = document.createElement('div')
     textContainer.classList.add('quiz-body')
 
-
     const h2 = document.createElement("h2")
     const prompt = document.createTextNode(text)
+
+    if (bold) h2.classList.add('bold')
 
     h2.appendChild(prompt)
     textContainer.appendChild(h2)
@@ -178,12 +178,10 @@ const displayPrompt=(text) => {
 }
 
 const displayQuestion = (question) => {
-
     displayHeading('Question ' + (activeQuestion + 1) + ' / ' + questions.length)
     displayImage(question.image, question.alt)
     displayPrompt(question.prompt)
 
-    
     const textContainer = document.createElement('div')
     textContainer.classList.add('quiz-body')
 
@@ -196,10 +194,12 @@ const displayQuestion = (question) => {
         li.appendChild(text)
         li.classList.add('button')
         li.addEventListener('click', () => {
-            if (index === question.answer) {
+            const isRightAnswer = index === question.answer
+            if (isRightAnswer) {
                 addPoint()
             }
 
+            choices.push(index)
             nextQuestion()
         })
 
@@ -219,7 +219,7 @@ const getResultQuote = (points) => {
     if (points < 4) {
         return 'You\'ve tried nothing and you\'re all out of ideas!'
     } else if (points < 7) {
-        return 'Umm... You probably should ignore that.'
+        return 'Umm... We probably should ignore that.'
     } else {
         return 'I gotta tell ya, this is pretty terrific!'
     }
@@ -250,15 +250,14 @@ const displayResult = () => {
 
     const src = getResultImage(points)
     const alt = getResultAlt(points)
-
     displayImage(src, alt)
 
+    displayPrompt(username, true)
 
     const quote = getResultQuote(points)
+    displayPrompt(quote)
 
-   displayPrompt(quote)
-   displayPrompt(points + '/' + questions.length)
-
+    displayPrompt(points + '/' + questions.length)
 
     const button = document.createElement('button')
     const buttonText = document.createTextNode('Restart')
@@ -274,6 +273,37 @@ const displayResult = () => {
 
     quiz.appendChild(button)
 
+    displayHeading('Your answers')
+
+    const questionsContainer = document.createElement('ol')
+    questionsContainer.classList.add('summary')
+    questions.forEach((question, index) => {
+        const entry = document.createElement('li')
+        const choice = choices[index]
+        const isRightAnswer = choice === question.answer
+        const entryText = document.createTextNode(question.prompt)
+        const answerList = document.createElement('ul')
+        const answer = document.createElement('li')
+        const answerSpan = document.createElement('span')
+        const answerText = document.createTextNode(question.options[choice])
+        const answerTextPrefix = document.createTextNode('Your answer:')
+
+        if (isRightAnswer) {
+            answer.classList.add('right')
+        } else {
+            answer.classList.add('wrong')
+        }
+        
+        answerSpan.appendChild(answerText)
+        answer.appendChild(answerTextPrefix)
+        answer.appendChild(answerSpan)
+        answerList.appendChild(answer)
+        entry.appendChild(entryText)
+        entry.appendChild(answerList)
+        questionsContainer.appendChild(entry)
+    })
+
+    quiz.appendChild(questionsContainer)
 }
 
 const nextQuestion = () => {
@@ -286,11 +316,52 @@ const nextQuestion = () => {
     }
 }
 
-const startButton = document.querySelector('#start-game')
+const displayUsernameEntry = () => {
+    clear()
+    
+    displayHeading('Before we start!')
+    displayImage('assets/images/thrillhouse.jpg', 'A television with the words "WELCOME THRILLHO", Milhouse is holding a video game controller')
+    
+    const inputId = 'username'
+    const form = document.createElement('form')
+    form.classList.add('username-form')
+    form.autocomplete = 'off'
+
+    const label = document.createElement('label')
+    const labelText = document.createTextNode('Enter a username')
+    label.for = inputId
+    label.appendChild(labelText)
+
+    const input = document.createElement('input')
+    input.placeholder = 'Mr. Thompson'
+    input.type = 'text'
+    input.id = inputId
+    input.required = true
+    input.minLength = 3
+    input.maxLength = 20
+
+    const submit = document.createElement('button')
+    const submitText = document.createTextNode('Lets go!')
+    submit.appendChild(submitText)
+    submit.type = 'submit'
+    submit.classList.add('button')
+
+    form.appendChild(label)
+    form.appendChild(input)
+    form.appendChild(submit)
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault()
+        username = input.value
+        displayActiveQuestion()
+    })
+
+    quiz.appendChild(form)
+}
 
 startButton.addEventListener('click', () => {
     home.classList.add('hide')
-    displayActiveQuestion()
+    displayUsernameEntry()
 })
 
 
